@@ -1,5 +1,5 @@
-import React,{useState, useEffect} from 'react'
-import Card from './Card'
+import React,{useState, useEffect, Suspense} from 'react'
+const Card = React.lazy(() => import('./Card'));
 import FirstScreen from './FirstScreen'
 
 
@@ -50,7 +50,9 @@ const applyDarkMode = (isDarkMode)=>{
         </div>
     <div className='items-center mx-auto justify-center h-[100vh] flex flex-col w-[320px] lg:w-[900px] md:w-[700px]   '><FirstScreen />
     </div>
-    <div className={ `${darkMode ? ' text-black border-[#000]':'  text-[#000]' } pb-5`}><Card darkMode={darkMode}/></div>
+    <div className={ `${darkMode ? ' text-black border-[#000]':'  text-[#000]' } pb-5`}><Suspense fallback={<div>Loading...</div>}>
+          <Card darkMode={darkMode} />
+        </Suspense></div>
     
     <a href='https://lj-six.vercel.app/'><div className={`py-5 items-center justify-center flex ${darkMode? ' bg-[#232B2B] text-[#fff]': 'bg-[#232B2B] text-[#fff]'} `}>REMAKE BY LAJA</div>
     </a></div>
